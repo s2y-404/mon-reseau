@@ -1,6 +1,6 @@
 <template>
   <HeaderComponent />
-  <NavbarComponent nbInvitation="6" :datas="dataList" />
+  <NavbarComponent nbInvitation="6" :datas="dataList" @datas-updated="handleDatasUpdated" />
   <FilterComponent />
   <CardListComponent :datas="dataList" />
 </template>
@@ -18,6 +18,11 @@ export default {
     NavbarComponent,
     FilterComponent,
     CardListComponent,
+  },
+  methods: {
+    handleDatasUpdated(newDatas) {
+      this.dataList = newDatas;
+    }
   },
   data() {
     return {

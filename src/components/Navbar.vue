@@ -11,26 +11,31 @@
           <h1 class="modal-title fs-5" id="addModalLabel">Faire une demande d'ajout d'un ami ou d'un groupe</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" style="padding: 5%;">
-          <form @submit="onSubmit()" id="FormAdd" class="flex-grow-1 d-flex">
-            <div id="group-filtre" class="form-check me-5">
-              <input class="form-check-input" type="checkbox" id="friend" name="friend" />
-              <label class="form-check-label" for="friend">ami</label>
+        <form @submit.prevent="onSubmit" id="FormAdd" class="d-flex flex-column">
+          <div class="modal-body" style="padding: 5%;">
+
+            <div>
+              <div id="group-filtre" class="form-check form-check-inline me-5">
+                <input class="form-check-input" type="radio" name="type" v-model="typeInput" value="type" checked />
+                <label class="form-check-label" for="user">ami</label>
+              </div>
+              <div id="group-filtre" class="form-check form-check-inline me-5">
+                <input class="form-check-input" type="radio" name="type" v-model="typeInput" value="group" />
+                <label class="form-check-label" for="group">groupe</label>
+              </div>
             </div>
-            <div id="group-filtre" class="form-check me-5">
-              <input class="form-check-input" type="checkbox" id="group" name="group" />
-              <label class="form-check-label" for="group">groupe</label>
+
+            <div class="input-group flex-nowrap" style="margin: 5% 0;">
+              <span class="input-group-text" id="nameInput"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <input type="text" class="form-control" placeholder="pseudo ou nom de groupe" v-model="nameInput" />
             </div>
-          </form>
-          <div class="input-group flex-nowrap" style="margin: 5% 0;">
-            <span class="input-group-text" id="navbar-name"><i class="fa-solid fa-magnifying-glass"></i></span>
-            <input type="text" class="form-control" placeholder="pseudo ou nom de groupe" aria-label="Username" aria-describedby="navbar-name">
+
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">annuler</button>
-          <button type="submit" class="btn btn-secondary">ajouter</button>
-        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">annuler</button>
+            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">ajouter</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -40,17 +45,32 @@
 export default {
   name: 'NavbarComponent',
   props: {
-    nbInvitation: Number
+    nbInvitation: Number,
+    datas: Array,
   },
+  groupedProps: ['typeInput', 'nameInput'],
   methods: {
     onSubmit() {
-      console.log("form submitted");
+      const newDatas = this.datas.slice();
+      const id = newDatas.length;
+      const type = this.typeInput
+      const name = this.nameInput
+      const img = this.typeInput === "group" ? "pp_g" : "pp_m_1";
+
+      newDatas.push({
+        id: id,
+        name: name,
+        type: type,
+        image: img
+      });
+
+      this.$emit('datas-updated', newDatas);
     },
   }
+
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 nav {
   width: 100%;
@@ -61,5 +81,4 @@ nav {
   justify-content: end;
   align-items: center;
 }
-
 </style>
