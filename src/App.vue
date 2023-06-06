@@ -2,7 +2,7 @@
   <HeaderComponent />
   <NavbarComponent nbInvitation="6" :datas="dataList" @datas-updated="handleDatasUpdated" />
   <FilterComponent />
-  <CardListComponent :datas="dataList" />
+  <CardListComponent :dataList="dataList" @remove="handleDatasDeleted" />
 </template>
 
 <script>
@@ -22,6 +22,10 @@ export default {
   methods: {
     handleDatasUpdated(newDatas) {
       this.dataList = newDatas;
+    },
+    handleDatasDeleted(id) {
+      console.log("Card removed");
+      this.dataList = this.dataList.filter(item => item.id !== id);
     }
   },
   data() {
@@ -76,7 +80,7 @@ export default {
           "image": "pp_w_2"
         },
         {
-          "id": "20",
+          "id": "8",
           "name": "Dailybiz Dragon",
           "type": "group",
           "image": "pp_g"

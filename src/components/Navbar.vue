@@ -52,7 +52,7 @@ export default {
   methods: {
     onSubmit() {
       const newDatas = this.datas.slice();
-      const id = newDatas.length;
+      const id = this.datas.length > 0 ? +(this.datas[newDatas.length - 1].id) + 1 : 1;
       const type = this.typeInput
       const name = this.nameInput
       const img = this.typeInput === "group" ? "pp_g" : "pp_m_1";

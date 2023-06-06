@@ -1,8 +1,14 @@
 
 <template>
-    <div class="card-list">
-      <div v-for="data in this.datas" :key="data.id">
-        <CardComponent :id="data.id" :name="data.name" :profile_picture="data.image" :type="data.type" />
+    <div v-if="this.dataList.length === 0" class="d-flex justify-content-center align-items-center">
+      <img src="@/assets/users_blank.png" alt="Répertoire vide" style="width: 45%;">
+    </div>
+    <div v-else class="card-list">
+      <div v-for="data in this.dataList" :key="data.id">
+        <CardComponent  
+          :data="data" 
+          @remove="() => removeCard(data.id)" 
+        />
       </div>
     </div>
 </template>
@@ -15,12 +21,23 @@ export default {
     CardComponent
   },
   props: {
-    datas: Array
+    dataList: Array
+  },
+  data() {
+    return {
+      localDataList: [...this.dataList]
+    };
+  },
+  methods: {
+    removeCard(id) {
+      console.log("Removing card with id:", id);
+      this.localDataList = this.localDataList.filter(item => item.id !== id);
+      this.$emit('remove', id);
+    }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .card-list {
     display: grid;
