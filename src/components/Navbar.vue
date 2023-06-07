@@ -27,7 +27,7 @@
 
             <div class="input-group flex-nowrap" style="margin: 5% 0;">
               <span class="input-group-text" id="nameInput"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <input type="text" class="form-control" placeholder="pseudo ou nom de groupe" v-model="nameInput" />
+              <input type="text" class="form-control" placeholder="pseudo ou nom de groupe" v-model="nameInput" required />
             </div>
 
           </div>
@@ -45,10 +45,16 @@
 export default {
   name: 'NavbarComponent',
   props: {
-    nbInvitation: Number,
-    datas: Array,
+    nbInvitation: String,
+    datas: Array
   },
-  groupedProps: ['typeInput', 'nameInput'],
+  data() {
+    return {
+      typeInput: '', // Définissez typeInput comme une propriété de données
+      nameInput: '' // Définissez nameInput comme une propriété de données
+    };
+  },
+  emits: ['datas-updated'],
   methods: {
     onSubmit() {
       const newDatas = this.datas.slice();

@@ -2,15 +2,15 @@
   <div id="filter" class="d-flex">
     <div class="flex-grow-1 d-flex">
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" id="friend" name="friend" />
+        <input class="form-check-input" type="checkbox" id="friend" name="friend" checked />
         <label class="form-check-label" for="friend">Mes amis</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" id="group" name="group" />
+        <input class="form-check-input" type="checkbox" id="group" name="group" checked />
         <label class="form-check-label" for="group">Mes groupes</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" id="admin" name="admin" />
+        <input class="form-check-input" type="checkbox" id="admin" name="admin" checked />
         <label class="form-check-label" for="admin">Mes groupes admin</label>
       </div>
     </div>

@@ -23,6 +23,7 @@ export default {
   props: {
     dataList: Array
   },
+  emits: ['remove', 'datas-updated', 'datasUpdated'],
   data() {
     return {
       localDataList: [...this.dataList]

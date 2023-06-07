@@ -22,10 +22,12 @@ export default {
   methods: {
     handleDatasUpdated(newDatas) {
       this.dataList = newDatas;
+      this.$emit('datas-updated', newDatas)
     },
     handleDatasDeleted(id) {
       console.log("Card removed");
       this.dataList = this.dataList.filter(item => item.id !== id);
+      this.$emit('datasUpdated');
     }
   },
   data() {
