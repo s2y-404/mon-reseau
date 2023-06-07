@@ -6,6 +6,7 @@
     <div v-else class="card-list">
       <div v-for="data in this.dataList" :key="data.id">
         <CardComponent  
+          v-if="['user'].includes(data.type)"
           :data="data" 
           @remove="() => removeCard(data.id)" 
         />
@@ -31,7 +32,7 @@ export default {
   },
   methods: {
     removeCard(id) {
-      console.log("Removing card with id:", id);
+      console.log("CardList | Removing card with id:", id);
       this.localDataList = this.localDataList.filter(item => item.id !== id);
       this.$emit('remove', id);
     }

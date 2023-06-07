@@ -2,15 +2,15 @@
   <div id="filter" class="d-flex">
     <div class="flex-grow-1 d-flex">
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" id="friend" name="friend" checked />
+        <input class="form-check-input" type="checkbox" v-model="friend" name="friend" checked />
         <label class="form-check-label" for="friend">Mes amis</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" id="group" name="group" checked />
+        <input class="form-check-input" type="checkbox" v-model="group" name="group" checked />
         <label class="form-check-label" for="group">Mes groupes</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" id="admin" name="admin" checked />
+        <input class="form-check-input" type="checkbox" v-model="admin" name="admin" checked />
         <label class="form-check-label" for="admin">Mes groupes admin</label>
       </div>
     </div>
@@ -25,12 +25,19 @@
 export default {
   name: 'FilterComponent',
   props: {
-    nbInvitation: Number
-  }
+  },
+  data() {
+    return {
+      // checkChecked: String
+      friend: Boolean,
+      group: Boolean,
+      admin: Boolean
+    }
+  },
+  // emits: ['friend', 'group', 'admin']
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #filter {
   width: 100%;
