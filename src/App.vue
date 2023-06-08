@@ -65,7 +65,7 @@ export default {
           "id": "4",
           "name": "Monkey 🦧",
           "type": "admin",
-          "image": "pp_g"
+          "image": "pp_a"
         },
         {
           "id": "5",
@@ -77,7 +77,7 @@ export default {
           "id": "6",
           "name": "NFL 🏈",
           "type": "admin",
-          "image": "pp_g"
+          "image": "pp_a"
         },
         {
           "id": "7",

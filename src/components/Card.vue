@@ -1,6 +1,7 @@
 
 <template>
-  <div class="card d-flex flex-row align-items-center px-2" style="width: 18rem; height: 80px; margin: 5.6px;">
+  <div class="card d-flex flex-row align-items-center px-2 flex-grow-2" 
+    style="width: 18.4em; height: 80px; margin: 2px;">
     <img :src="require(`@/assets/${this.data.image}.png`)" class="card-img-top" alt="Photo de profil" />
     <div class="card-body">
       <span class="card-title fw-bold">{{ data.name }}</span>
