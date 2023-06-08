@@ -2,15 +2,15 @@
   <div id="filter" class="d-flex">
     <div class="flex-grow-1 d-flex">
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="friend" name="friend" checked />
+        <input class="form-check-input" type="checkbox" v-model="friend" @change="onCheck('friend')" name="friend" checked />
         <label class="form-check-label" for="friend">Mes amis</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="group" name="group" checked />
+        <input class="form-check-input" type="checkbox" v-model="group" @change="onCheck('group')" name="group" checked />
         <label class="form-check-label" for="group">Mes groupes</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="admin" name="admin" checked />
+        <input class="form-check-input" type="checkbox" v-model="admin" @change="onCheck('admin')" name="admin" checked />
         <label class="form-check-label" for="admin">Mes groupes admin</label>
       </div>
     </div>
@@ -28,13 +28,29 @@ export default {
   },
   data() {
     return {
-      // checkChecked: String
-      friend: Boolean,
-      group: Boolean,
-      admin: Boolean
+      filterChecked: ["friend", "group", "admin"],
+      friend: true,
+      group: true,
+      admin: true
     }
   },
-  // emits: ['friend', 'group', 'admin']
+  methods: {
+    onCheck(checkbox) {
+      (checkbox === "friend") && this.toggleArrayItem(this.filterChecked, "friend");
+      (checkbox === "group")  && this.toggleArrayItem(this.filterChecked, "group");
+      (checkbox === "admin")  && this.toggleArrayItem(this.filterChecked, "admin");
+
+      console.log(this.filterChecked)
+    },
+    toggleArrayItem(a, v) {
+      var i = a.indexOf(v);
+      if (i === -1)
+        a.push(v);
+      else
+        a.splice(i, 1);
+    }
+  },
+  emits: ['filterChecked']
 }
 </script>
 
