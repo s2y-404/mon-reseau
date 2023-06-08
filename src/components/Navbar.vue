@@ -16,8 +16,8 @@
 
             <div>
               <div id="group-filtre" class="form-check form-check-inline me-5">
-                <input class="form-check-input" type="radio" name="type" v-model="typeInput" value="type" checked />
-                <label class="form-check-label" for="user">ami</label>
+                <input class="form-check-input" type="radio" name="type" v-model="typeInput" value="friend" checked />
+                <label class="form-check-label" for="friend">ami</label>
               </div>
               <div id="group-filtre" class="form-check form-check-inline me-5">
                 <input class="form-check-input" type="radio" name="type" v-model="typeInput" value="group" />
@@ -50,8 +50,8 @@ export default {
   },
   data() {
     return {
-      typeInput: '', // Définissez typeInput comme une propriété de données
-      nameInput: '' // Définissez nameInput comme une propriété de données
+      typeInput: 'friend',
+      nameInput: ''
     };
   },
   emits: ['datas-updated'],
@@ -62,7 +62,7 @@ export default {
       const type = this.typeInput
       const name = this.nameInput
       const img = this.typeInput === "group" ? "pp_g" : "pp_m_1";
-
+console.log(this.typeInput)
       newDatas.push({
         id: id,
         name: name,

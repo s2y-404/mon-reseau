@@ -40,7 +40,7 @@ export default {
       (checkbox === "group")  && this.toggleArrayItem(this.filterChecked, "group");
       (checkbox === "admin")  && this.toggleArrayItem(this.filterChecked, "admin");
 
-      console.log(this.filterChecked)
+      this.$emit('filter-checked-updated', this.filterChecked);
     },
     toggleArrayItem(a, v) {
       var i = a.indexOf(v);
@@ -50,7 +50,7 @@ export default {
         a.splice(i, 1);
     }
   },
-  emits: ['filterChecked']
+  emits: ['filter-checked-updated']
 }
 </script>
 

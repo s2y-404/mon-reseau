@@ -1,8 +1,8 @@
 <template>
   <HeaderComponent />
   <NavbarComponent nbInvitation="6" :datas="dataList" @datas-updated="handleDatasUpdated" />
-  <FilterComponent />
-  <CardListComponent :dataList="dataList" @remove="handleDatasDeleted" />
+  <FilterComponent @filter-checked-updated="handleFilterCheckedUpdated" />
+  <CardListComponent :dataList="dataList" :arrayFilter="arrayFilter" @remove="handleDatasDeleted" />
 </template>
 
 <script>
@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     handleDatasUpdated(newDatas) {
+      console.log(newDatas)
       this.dataList = newDatas;
       this.$emit('datas-updated', newDatas)
     },
@@ -28,6 +29,9 @@ export default {
       console.log("App | Card removed");
       this.dataList = this.dataList.filter(item => item.id !== id);
       this.$emit('datasUpdated');
+    },
+    handleFilterCheckedUpdated(filterChecked) {
+      this.arrayFilter = filterChecked
     }
   },
   data() {
@@ -36,58 +40,65 @@ export default {
         {
           "id": "0",
           "name": "Doe John",
-          "type": "user",
+          "type": "friend",
           "image": "pp_m_2"
         },
         {
           "id": "1",
           "name": "Smith Emma",
-          "type": "user",
+          "type": "friend",
           "image": "pp_w_1"
         },
         {
           "id": "2",
           "name": "Johnson Michael",
-          "type": "user",
+          "type": "friend",
           "image": "pp_m_2"
         },
         {
           "id": "3",
           "name": "Williams Olivia",
-          "type": "user",
+          "type": "friend",
           "image": "pp_w_1"
         },
         {
           "id": "4",
-          "name": "Brown James",
-          "type": "user",
-          "image": "pp_m_1"
+          "name": "Monkey 🦧",
+          "type": "admin",
+          "image": "pp_g"
         },
         {
           "id": "5",
           "name": "Jones Sophia",
-          "type": "user",
+          "type": "friend",
           "image": "pp_w_1"
         },
         {
           "id": "6",
-          "name": "Davis Daniel",
-          "type": "user",
-          "image": "pp_m_2"
+          "name": "NFL 🏈",
+          "type": "admin",
+          "image": "pp_g"
         },
         {
           "id": "7",
-          "name": "Miller Isabella",
-          "type": "user",
-          "image": "pp_w_2"
+          "name": "NBA 🏀",
+          "type": "group",
+          "image": "pp_g"
         },
         {
           "id": "8",
           "name": "Dailybiz Dragon",
           "type": "group",
           "image": "pp_g"
+        },
+        {
+          "id": "9",
+          "name": "Brown James",
+          "type": "friend",
+          "image": "pp_m_1"
         }
-      ]
+      ],
+      arrayFilter: ["friend", "group", "admin"]
     };
   }
 }

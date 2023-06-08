@@ -1,12 +1,12 @@
 
 <template>
-    <div v-if="this.dataList.length === 0" class="d-flex justify-content-center align-items-center">
+    <div v-if="!this.dataList.length || !arrayFilter.length" class="d-flex justify-content-center align-items-center">
       <img src="@/assets/users_blank.png" alt="Répertoire vide" style="width: 45%;">
     </div>
     <div v-else class="card-list">
       <div v-for="data in this.dataList" :key="data.id">
         <CardComponent  
-          v-if="['user'].includes(data.type)"
+          v-if="arrayFilter.includes(data.type)"
           :data="data" 
           @remove="() => removeCard(data.id)" 
         />
@@ -22,7 +22,8 @@ export default {
     CardComponent
   },
   props: {
-    dataList: Array
+    dataList: Array,
+    arrayFilter: Array
   },
   emits: ['remove', 'datas-updated', 'datasUpdated'],
   data() {
@@ -42,9 +43,16 @@ export default {
 
 <style scoped>
   .card-list {
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fill,minmax(18rem, 1fr));
-    justify-items: center;
+    justify-items: center; 
+    gap: 10px 1.2%; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 1% 0;
   }
 
 </style>
