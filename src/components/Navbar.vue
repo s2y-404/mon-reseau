@@ -14,17 +14,64 @@
         <form @submit.prevent="onSubmit" id="FormAdd" class="d-flex flex-column">
           <div class="modal-body" style="padding: 5%;">
 
-            <div>
-              <div id="group-filtre" class="form-check form-check-inline me-5">
-                <input class="form-check-input" type="radio" name="type" v-model="typeInput" value="friend" checked />
-                <label class="form-check-label" for="friend">ami</label>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+              <!-- CHOIX DU TYPE (FRIEND OU GROUP) -->
+              <div class="d-flex justify-content-between" style="width: 100%; padding: 1% 20%;">
+                <div id="group-filtre" class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="type" id="friend" v-model="typeInput" value="friend" checked />
+                  <label class="form-check-label" for="friend">ami</label>
+                </div>
+                <div id="group-filtre" class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="type" id="group" v-model="typeInput" value="group" />
+                  <label class="form-check-label" for="group">groupe</label>
+                </div>
               </div>
-              <div id="group-filtre" class="form-check form-check-inline me-5">
-                <input class="form-check-input" type="radio" name="type" v-model="typeInput" value="group" />
-                <label class="form-check-label" for="group">groupe</label>
+  
+              <!-- CHOIX DE LA PHOTO DE PROFIL -->
+              <div v-if="this.typeInput === 'friend'" class="d-flex justify-content-evenly" style="width: 75%;">
+                <div class="form-check p-0 d-flex flex-column align-items-center justify-content-center">
+                  <label class="form-check-label" for="pp_w_1">
+                    <img src="@/assets/pp_w_1.png" alt="photo femme 1">
+                  </label>
+                  <input class="form-check-input" type="radio" name="pp" id="pp_w_1" v-model="ppInput" value="pp_w_1" checked />
+                </div>
+                <div class="form-check p-0 d-flex flex-column align-items-center justify-content-center">
+                  <label class="form-check-label" for="pp_w_2">
+                    <img src="@/assets/pp_w_2.png" alt="photo femme 2">
+                  </label>
+                  <input class="form-check-input" type="radio" name="pp" id="pp_w_2" v-model="ppInput" value="pp_w_2" />
+                </div>
+                <div class="form-check p-0 d-flex flex-column align-items-center justify-content-center">
+                  <label class="form-check-label" for="pp_m_1">
+                    <img src="@/assets/pp_m_1.png" alt="photo homme 1">
+                  </label>
+                  <input class="form-check-input" type="radio" name="pp" id="pp_m_1" v-model="ppInput" value="pp_m_1" />
+                </div>
+                <div class="form-check p-0 d-flex flex-column align-items-center justify-content-center">
+                  <label class="form-check-label" for="pp_m_2">
+                    <img src="@/assets/pp_m_2.png" alt="photo homme 2">
+                  </label>
+                  <input class="form-check-input" type="radio" name="pp" id="pp_m_2" v-model="ppInput" value="pp_m_2" />
+                </div>
+              </div>
+            </div>
+            <div v-if="this.typeInput === 'group'" class="d-flex justify-content-evenly" style="width: 75%;">
+              <div class="form-check p-0 d-flex flex-column align-items-center justify-content-center">
+                <label class="form-check-label" for="pp_g">
+                  <img src="@/assets/pp_g.png" alt="photo group">
+                </label>
+                <input class="form-check-input" type="radio" name="pp" id="pp_g" v-model="ppInput" value="pp_g" checked />
+              </div>
+              <div class="form-check p-0 d-flex flex-column align-items-center justify-content-center">
+                <label class="form-check-label" for="pp_a">
+                  <img src="@/assets/pp_a.png" alt="photo groupe admin">
+                </label>
+                <input class="form-check-input" type="radio" name="pp" id="pp_a" v-model="ppInput" value="pp_a" />
               </div>
             </div>
 
+
+            <!-- INPUT TEXT -->
             <div class="input-group flex-nowrap" style="margin: 5% 0;">
               <span class="input-group-text" id="nameInput"><i class="fa-solid fa-magnifying-glass"></i></span>
               <input type="text" class="form-control" placeholder="pseudo ou nom de groupe" v-model="nameInput" required />
@@ -51,6 +98,7 @@ export default {
   data() {
     return {
       typeInput: 'friend',
+      ppInput: (this.typeInput === 'friend') ? 'pp_w_1' : 'pp_g',
       nameInput: ''
     };
   },
@@ -59,9 +107,9 @@ export default {
     onSubmit() {
       const newDatas = this.datas.slice();
       const id = this.datas.length > 0 ? +(this.datas[newDatas.length - 1].id) + 1 : 1;
-      const type = this.typeInput
+      const type = (this.ppInput === 'pp_a') ? 'admin' : this.typeInput
       const name = this.nameInput
-      const img = this.typeInput === "group" ? "pp_g" : "pp_m_1";
+      const img = this.ppInput;
 console.log(this.typeInput)
       newDatas.push({
         id: id,
@@ -86,5 +134,9 @@ nav {
   display: flex;
   justify-content: end;
   align-items: center;
+}
+
+img {
+  width: 45px;
 }
 </style>
