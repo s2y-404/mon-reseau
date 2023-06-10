@@ -34,6 +34,7 @@ export default {
   methods: {
     removeCard(id) {
       console.log("CardList | Removing card with id:", id);
+
       this.localDataList = this.localDataList.filter(item => item.id !== id);
       this.$emit('remove', id);
     }
@@ -43,16 +44,11 @@ export default {
 
 <style scoped>
   .card-list {
-    /* display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(18rem, 1fr));
-    justify-items: center; 
-    gap: 10px 1.2%; */
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    /* justify-content: space-between; */
+    /* align-items: center; */
     flex-wrap: wrap;
-    flex-direction: row;
-    padding: 1% 0;
+    /* flex-direction: row; */
   }
 
 </style>

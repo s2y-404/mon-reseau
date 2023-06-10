@@ -1,7 +1,6 @@
 
 <template>
-  <div class="card d-flex flex-row align-items-center px-2 flex-grow-2" 
-    style="width: 18.4em; height: 80px; margin: 2px;">
+  <div class="card card-items">
     <img :src="require(`@/assets/${this.data.image}.png`)" class="card-img-top" alt="Photo de profil" />
     <div class="card-body">
       <span class="card-title fw-bold">{{ data.name }}</span>
@@ -35,10 +34,11 @@ export default {
   props: {
     data: Object
   },
+  emits: ['remove'],
   methods: {
     removeCard() {
       this.$emit('remove')
-      console.log(`Card | ${this.data.id}`)
+      console.log(`Card     | ${this.data.id}`)
     },
   }
 };
@@ -54,5 +54,17 @@ export default {
     padding: 12px 15px;
     border: 2px solid #2c3e50;
     border-radius: 100%;
+  }
+
+  .card-items {    
+    width: 18.2em; 
+    height: 80px; 
+    
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    flex: 1 0 500px;
+    box-sizing: border-box;
+    margin: 1rem .25em;
   }
 </style>

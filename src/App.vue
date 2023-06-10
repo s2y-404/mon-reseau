@@ -26,7 +26,8 @@ export default {
       this.$emit('datas-updated', newDatas)
     },
     handleDatasDeleted(id) {
-      console.log("App | Card removed");
+      console.log(`App      | Card removed`)
+
       this.dataList = this.dataList.filter(item => item.id !== id);
       this.$emit('datasUpdated');
     },
