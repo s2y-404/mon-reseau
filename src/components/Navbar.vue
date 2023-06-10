@@ -18,11 +18,11 @@
               <!-- CHOIX DU TYPE (FRIEND OU GROUP) -->
               <div class="d-flex justify-content-between" style="width: 100%; padding: 1% 20% 4% 20%;">
                 <div id="group-filtre" class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="type" id="friend" v-model="typeInput" value="friend" checked />
+                  <input class="form-check-input" type="radio" name="type" id="friend" v-model="typeInput" value="friend" @change="typeChange" checked />
                   <label class="form-check-label" for="friend">ami</label>
                 </div>
                 <div id="group-filtre" class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="type" id="group" v-model="typeInput" value="group" />
+                  <input class="form-check-input" type="radio" name="type" id="group" v-model="typeInput" value="group" @change="typeChange" />
                   <label class="form-check-label" for="group">groupe</label>
                 </div>
               </div>
@@ -98,16 +98,21 @@ export default {
   data() {
     return {
       typeInput: 'friend',
-      ppInput: '',
+      ppInput: 'pp_w_1',
       nameInput: ''
     };
   },
   emits: ['datas-updated'],
   methods: {
+    typeChange() {
+      this.ppInput = document.querySelector('input[name="pp"]:checked').value;
+    },
     onSubmit() {
+      console.log(`type: ${this.typeInput}\npp: ${this.ppInput}`);
+
       const newDatas = this.datas.slice();
       const id       = this.datas.length > 0 ? +(this.datas[newDatas.length - 1].id) + 1 : 1;
-      const img      = (this.typeInput === 'friend') ? 'pp_w_1' : 'pp_g';
+      const img      = this.ppInput;
       const type     = (this.ppInput === 'pp_a') ? 'admin' : this.typeInput
       const name     = this.nameInput
 
