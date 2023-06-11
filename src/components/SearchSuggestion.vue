@@ -1,6 +1,5 @@
 <template>
-  <div style="width: 500px;">
-
+<div style="width: 445px;">
   <!-- input text -->
   <div class="input-group flex-nowrap" @input="onChangeInput">
     <span class="input-group-text" id="filter-search"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -46,7 +45,7 @@ export default {
       this.localDatas = arrayTemp.slice(0, 3)
     },
     onAddSuggestion(data) {
-      if (this.searchAdd.length < 5) {
+      if (this.searchAdd.length < 5 && this.searchAdd.findIndex(el => el.id == data.id) === -1) {
         this.searchAdd.push(data)
       }
     },
@@ -94,7 +93,7 @@ export default {
     flex-wrap: wrap;
   }
   .searchAdd {
-    width: 45%;
+    width: 49%;
     height: 35px;
     display: flex;
     align-items: center;
@@ -103,5 +102,6 @@ export default {
     border-radius: 5px;
     overflow: hidden;
     margin: .5% 0;
+    font-size: small;
   }
 </style>

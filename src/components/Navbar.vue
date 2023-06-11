@@ -26,56 +26,9 @@
                   <label class="form-check-label" for="group">groupe</label>
                 </div>
               </div>
-  
-              <!-- CHOIX DE LA PHOTO DE PROFIL -->
-              <div v-if="this.typeInput === 'friend'" class="d-flex justify-content-evenly" style="width: 75%;">
-                <div class="p-0 input-img">
-                  <input class="" type="radio" name="pp" id="pp_w_1" v-model="ppInput" value="pp_w_1" checked />
-                  <label class="" for="pp_w_1">
-                    <img src="@/assets/pp_w_1.png" alt="photo femme 1">
-                  </label>
-                </div>
-                <div class="p-0 input-img">
-                  <input class="" type="radio" name="pp" id="pp_w_2" v-model="ppInput" value="pp_w_2" />
-                  <label class="" for="pp_w_2">
-                    <img src="@/assets/pp_w_2.png" alt="photo femme 2">
-                  </label>
-                </div>
-                <div class="p-0 input-img">
-                  <input class="" type="radio" name="pp" id="pp_m_1" v-model="ppInput" value="pp_m_1" />
-                  <label class="" for="pp_m_1">
-                    <img src="@/assets/pp_m_1.png" alt="photo homme 1">
-                  </label>
-                </div>
-                <div class="p-0 input-img">
-                  <input class="" type="radio" name="pp" id="pp_m_2" v-model="ppInput" value="pp_m_2" />
-                  <label class="" for="pp_m_2">
-                    <img src="@/assets/pp_m_2.png" alt="photo homme 2">
-                  </label>
-                </div>
-              </div>
-              <div v-if="this.typeInput === 'group'" class="d-flex justify-content-evenly " style="width: 75%;">
-                <div class="p-0 input-img">
-                  <input class="" type="radio" name="pp" id="pp_g" v-model="ppInput" value="pp_g" checked />
-                  <label class="" for="pp_g">
-                    <img src="@/assets/pp_g.png" alt="photo group">
-                  </label>
-                </div>
-                <div class="p-0 input-img">
-                  <input class="" type="radio" name="pp" id="pp_a" v-model="ppInput" value="pp_a" />
-                  <label class="" for="pp_a">
-                    <img src="@/assets/pp_a.png" alt="photo groupe admin">
-                  </label>
-                </div>
-              </div>
             </div>
 
-
-            <!-- INPUT TEXT -->
-            <div class="input-group flex-nowrap" style="margin: 5% 0;">
-              <span class="input-group-text" id="nameInput"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <input type="text" class="form-control" placeholder="pseudo ou nom de groupe" v-model="nameInput" required />
-            </div>
+            <SearchSuggestionComponent :searchData="searchData" />
 
           </div>
           <div class="modal-footer">
@@ -89,11 +42,17 @@
 </template>
 
 <script>
+import SearchSuggestionComponent from './SearchSuggestion.vue';
+
 export default {
   name: 'NavbarComponent',
+  components: {
+    SearchSuggestionComponent
+  },
   props: {
     nbInvitation: String,
-    dataList: Array
+    dataList: Array,
+    searchData: Array
   },
   data() {
     return {
