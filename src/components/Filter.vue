@@ -58,7 +58,6 @@ export default {
 #filter {
   width: 100%;
   height: 50px;
-  background-color: orange;
 
   display: flex;
   justify-content: space-between;

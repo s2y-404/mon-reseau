@@ -18,22 +18,22 @@
               <!-- CHOIX DU TYPE (FRIEND OU GROUP) -->
               <div class="d-flex justify-content-between" style="width: 100%; padding: 1% 20% 4% 20%;">
                 <div id="group-filtre" class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="type" id="friend" v-model="typeInput" value="friend" @change="typeChange" checked />
+                  <input class="form-check-input" type="radio" name="type" id="friend" v-model="typeInput" value="friend" checked />
                   <label class="form-check-label" for="friend">ami</label>
                 </div>
                 <div id="group-filtre" class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="type" id="group" v-model="typeInput" value="group" @change="typeChange" />
+                  <input class="form-check-input" type="radio" name="type" id="group" v-model="typeInput" value="group" />
                   <label class="form-check-label" for="group">groupe</label>
                 </div>
               </div>
             </div>
 
-            <SearchSuggestionComponent :searchData="searchData" />
+            <SearchSuggestionComponent :searchData="searchData" :typeInput="typeInput" @dataListAdded="handleDatasAdded" />
 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">annuler</button>
-            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">ajouter</button>
+            <button type="submit" class="btn btn-secondary">ajouter</button>
           </div>
         </form>
       </div>
@@ -57,29 +57,28 @@ export default {
   data() {
     return {
       typeInput: 'friend',
-      ppInput: 'pp_w_1',
-      nameInput: ''
+      nameInput: '',
+      searchAdd: []
     };
   },
   emits: ['dataListUpdated'],
   methods: {
-    typeChange() {
-      this.ppInput = document.querySelector('input[name="pp"]:checked').value;
+    handleDatasAdded(searchAdd) {
+      this.searchAdd = searchAdd
     },
     onSubmit() {
       const newDatas = this.dataList.slice();
-      const id       = this.dataList.length > 0 ? +(this.dataList[newDatas.length - 1].id) + 1 : 1;
-      const img      = this.ppInput;
-      const type     = (this.ppInput === 'pp_a') ? 'admin' : this.typeInput
-      const name     = this.nameInput
 
-      newDatas.push({
-        id: id,
-        name: name,
-        type: type,
-        image: img
+      this.searchAdd.forEach(element => {
+        const id = this.dataList.length > 0 ? +(newDatas.length) : 1;
+
+        newDatas.findIndex(el => el.name === element.name) === -1 && newDatas.push({
+          id: id,
+          name: element.name,
+          type: element.type,
+          image: element.image
+        });
       });
-
       this.$emit('dataListUpdated', newDatas);
     },
   }
@@ -91,7 +90,6 @@ export default {
 nav {
   width: 100%;
   height: 50px;
-  background-color: red;
 
   display: flex;
   justify-content: end;
@@ -100,19 +98,5 @@ nav {
 
 img {
   width: 70px;
-}
-
-.input-img input[type=radio]:checked + label>img {
-  border: 3px solid blue;
-  border-radius: 50%;
-}
-.input-img {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.input-img input {
-  display: none;
 }
 </style>

@@ -27,7 +27,8 @@
 export default {
   name: 'SearchSuggestionComponent',
   props: {
-    searchData: Array
+    searchData: Array,
+    typeInput: String
   },
   data() {
     return {
@@ -40,21 +41,23 @@ export default {
     onChangeInput() {
       this.localDatas = this.searchData.slice()
       var regex = new RegExp(`${this.searchInput}`, "ig")
-      var arrayTemp = this.localDatas.filter(element => element.name.match(regex))
+      var arrayTemp = this.localDatas.filter(element => element.name.match(regex) && element.type === this.typeInput)
 
       this.localDatas = arrayTemp.slice(0, 3)
     },
     onAddSuggestion(data) {
       if (this.searchAdd.length < 5 && this.searchAdd.findIndex(el => el.id == data.id) === -1) {
         this.searchAdd.push(data)
+        this.$emit('dataListAdded', this.searchAdd);
       }
     },
     onDeleteSuggestion(id) {
       let indexDel = this.searchAdd.findIndex(el => el.id === id)
       this.searchAdd.splice(indexDel, 1)
+      this.$emit('dataListAdded', this.searchAdd);
     }
   },
-  emits: []
+  emits: ['dataListAdded']
 }
 </script>
 
@@ -73,7 +76,6 @@ export default {
   .suggestion-group {
     width: 100%;
     height: var(45px * 3);
-    border: 2px solid red;
   }
   img {
     width: 40px;
@@ -87,7 +89,6 @@ export default {
   .searchAdd-group {
     width: 100%;
     min-height: 45px;
-    background: green;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
