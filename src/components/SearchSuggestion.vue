@@ -17,6 +17,8 @@
   <!-- suggestion -->
   <div v-if="this.searchInput.length >= 3" class="suggestion-group">
     <div v-for="data in this.localDatas" class="suggestion" :key="data.id" @click="onAddSuggestion(data)">
+      <img :src="require(`@/assets/${data.image}.png`)" class="card-img-top" alt="Photo de profil" />
+      <span class="name flex-grow-1">{{ data.name }}</span>
     </div>
   </div>
 </div>
@@ -50,7 +52,7 @@ export default {
     },
     onDeleteSuggestion(id) {
       let indexDel = this.searchAdd.findIndex(el => el.id === id)
-      this.searchAdd = this.searchAdd.splice(indexDel, 1)
+      this.searchAdd.splice(indexDel, 1)
     }
   },
   emits: []
