@@ -3,7 +3,6 @@
   <NavbarComponent nbInvitation="6" :dataList="dataList" :searchData="searchData"  @dataListUpdated="handleDatasUpdated" />
   <FilterComponent @filter-checked-updated="handleFilterCheckedUpdated" />
   <CardListComponent :dataList="dataList" :arrayFilter="arrayFilter" @remove="handleDatasDeleted" />
-  <!-- <SearchSuggestionComponent :searchData="searchData" /> -->
 </template>
 
 <script>
@@ -11,7 +10,6 @@ import HeaderComponent from './components/Header.vue';
 import NavbarComponent from './components/Navbar.vue';
 import FilterComponent from './components/Filter.vue';
 import CardListComponent from './components/CardList.vue';
-// import SearchSuggestionComponent from './components/SearchSuggestion.vue';
 
 export default {
   name: 'App',
@@ -20,7 +18,6 @@ export default {
     NavbarComponent,
     FilterComponent,
     CardListComponent,
-    // SearchSuggestionComponent,
   },
   methods: {
     handleDatasUpdated(newDatas) {

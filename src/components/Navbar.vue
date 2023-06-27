@@ -16,7 +16,7 @@
 
             <div class="d-flex flex-column justify-content-center align-items-center">
               <!-- CHOIX DU TYPE (FRIEND OU GROUP) -->
-              <div class="d-flex justify-content-between" style="width: 100%; padding: 1% 20% 4% 20%;">
+              <div class="d-flex justify-content-around" style="width: 100%; padding: 1% 20% 4% 20%;">
                 <div id="group-filtre" class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="type" id="friend" v-model="typeInput" value="friend" checked />
                   <label class="form-check-label" for="friend">ami</label>
