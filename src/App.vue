@@ -1,8 +1,8 @@
 <template>
   <HeaderComponent />
   <NavbarComponent nbInvitation="6" :dataList="dataList" :searchData="searchData"  @dataListUpdated="handleDatasUpdated" />
-  <FilterComponent @filter-checked-updated="handleFilterCheckedUpdated" />
-  <CardListComponent :dataList="dataList" :arrayFilter="arrayFilter" @remove="handleDatasDeleted" />
+  <FilterComponent @filter-checked-updated="handleFilterCheckedUpdated" @searchFilter-updated="handleSearchFilterUpdated" />
+  <CardListComponent :dataList="dataList" :arrayFilter="arrayFilter" :searchFilter="searchFilter" @remove="handleDatasDeleted" />
 </template>
 
 <script>
@@ -33,6 +33,9 @@ export default {
     },
     handleFilterCheckedUpdated(filterChecked) {
       this.arrayFilter = filterChecked
+    },
+    handleSearchFilterUpdated(searchFilter) {
+      this.searchFilter = searchFilter
     }
   },
   data() {
@@ -287,7 +290,8 @@ export default {
           "image": "pp_w_2"
         }
       ],
-      arrayFilter: ["friend", "group", "admin"]
+      arrayFilter: ["friend", "group", "admin"],
+      searchFilter: ''
     };
   }
 }
