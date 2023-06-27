@@ -1,7 +1,7 @@
 
 <template>
   <div class="card card-items">
-    <img :src="require(`@/assets/${this.data.image}.png`)" class="card-img-top" alt="Photo de profil" />
+    <img :src="require(`@/assets/${this.data.image}.png`)" alt="Photo de profil" />
     <div class="card-body">
       <span class="card-title fw-bold">{{ data.name }}</span>
     </div>
@@ -65,6 +65,6 @@ export default {
     align-items: center;
     flex: 1 0 500px;
     box-sizing: border-box;
-    margin: 1rem .25em;
+    margin: .5rem .25em;
   }
 </style>

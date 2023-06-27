@@ -1,15 +1,17 @@
 <template>
   <HeaderComponent />
-  <NavbarComponent nbInvitation="6" :datas="dataList" @datas-updated="handleDatasUpdated" />
+  <NavbarComponent nbInvitation="6" :dataList="dataList" @dataListUpdated="handleDatasUpdated" />
   <FilterComponent @filter-checked-updated="handleFilterCheckedUpdated" />
-  <CardListComponent :dataList="dataList" :arrayFilter="arrayFilter" @remove="handleDatasDeleted" />
+  <!-- <CardListComponent :dataList="dataList" :arrayFilter="arrayFilter" @remove="handleDatasDeleted" /> -->
+  <SearchSuggestionComponent :searchData="searchData" />
 </template>
 
 <script>
 import HeaderComponent from './components/Header.vue';
 import NavbarComponent from './components/Navbar.vue';
 import FilterComponent from './components/Filter.vue';
-import CardListComponent from './components/CardList.vue';
+// import CardListComponent from './components/CardList.vue';
+import SearchSuggestionComponent from './components/SearchSuggestion.vue';
 
 export default {
   name: 'App',
@@ -17,19 +19,20 @@ export default {
     HeaderComponent,
     NavbarComponent,
     FilterComponent,
-    CardListComponent,
+    // CardListComponent,
+    SearchSuggestionComponent,
   },
   methods: {
     handleDatasUpdated(newDatas) {
       console.log(newDatas)
       this.dataList = newDatas;
-      this.$emit('datas-updated', newDatas)
+      this.$emit('dataList-updated', newDatas)
     },
     handleDatasDeleted(id) {
       console.log(`App      | Card removed`)
 
       this.dataList = this.dataList.filter(item => item.id !== id);
-      this.$emit('datasUpdated');
+      this.$emit('dataListUpdated');
     },
     handleFilterCheckedUpdated(filterChecked) {
       this.arrayFilter = filterChecked
@@ -76,13 +79,13 @@ export default {
         },
         {
           "id": "6",
-          "name": "NFL 🏈",
+          "name": "[SPORT] NFL 🏈",
           "type": "admin",
           "image": "pp_a"
         },
         {
           "id": "7",
-          "name": "NBA 🏀",
+          "name": "[SPORT] NBA 🏀",
           "type": "group",
           "image": "pp_g"
         },
@@ -97,6 +100,194 @@ export default {
           "name": "Brown James",
           "type": "friend",
           "image": "pp_m_1"
+        }
+      ],
+      "searchData": [
+        {
+          "id": "10",
+          "name": "[SPORT] FFF ⚽",
+          "type": "group",
+          "image": "pp_g"
+        },
+        {
+          "id": "11",
+          "name": "Anderson David",
+          "type": "friend",
+          "image": "pp_m_2"
+        },
+        {
+          "id": "12",
+          "name": "les Warriors 🔥",
+          "type": "group",
+          "image": "pp_g"
+        },
+        {
+          "id": "13",
+          "name": "🥰 Les Besties 🥰",
+          "type": "group",
+          "image": "pp_g"
+        },
+        {
+          "id": "14",
+          "name": "Harris Emily",
+          "type": "friend",
+          "image": "pp_w_1"
+        },
+        {
+          "id": "15",
+          "name": "Jean-Pierre Matthew",
+          "type": "friend",
+          "image": "pp_m_2"
+        },
+        {
+          "id": "16",
+          "name": "Moore Jessica",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "17",
+          "name": "Elon Musk",
+          "type": "friend",
+          "image": "elon"
+        },
+        {
+          "id": "18",
+          "name": "Moore Olivia",
+          "type": "friend",
+          "image": "pp_w_1"
+        },
+        {
+          "id": "19",
+          "name": "Miller Ethan",
+          "type": "friend",
+          "image": "pp_m_2"
+        },
+        {
+          "id": "20",
+          "name": "[SPORT] FFA 🏃‍♂️",
+          "type": "group",
+          "image": "pp_g"
+        },
+        {
+          "id": "21",
+          "name": "Leclerc Marie",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "22",
+          "name": "Martin Sophie",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "23",
+          "name": "Dubois Thomas",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "24",
+          "name": "Moreau Camille",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "25",
+          "name": "Lefebvre Laura",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "26",
+          "name": "Roux Alexandre",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "27",
+          "name": "Girard Emilie",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "28",
+          "name": "Leroy Maxime",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "29",
+          "name": "Fournier Julie",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "30",
+          "name": "[SPORT] MLB ⚾",
+          "type": "group",
+          "image": "pp_g"
+        },
+        {
+          "id": "31",
+          "name": "Dupont Pierre",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "21",
+          "name": "Morin Elodie",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "22",
+          "name": "Dupont Antoine",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "23",
+          "name": "Mercier Juliette",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "24",
+          "name": "Lecomte Lucas",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "25",
+          "name": "Leconte Mathilde",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "26",
+          "name": "Dupuis Emilien",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "27",
+          "name": "Marchand Charlotte",
+          "type": "friend",
+          "image": "pp_w_2"
+        },
+        {
+          "id": "28",
+          "name": "Dupuis Etienne",
+          "type": "friend",
+          "image": "pp_m_1"
+        },
+        {
+          "id": "29",
+          "name": "Lecomte Clara",
+          "type": "friend",
+          "image": "pp_w_2"
         }
       ],
       arrayFilter: ["friend", "group", "admin"]

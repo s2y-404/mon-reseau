@@ -2,15 +2,15 @@
   <div id="filter" class="d-flex">
     <div class="flex-grow-1 d-flex">
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="friend" @change="onCheck('friend')" name="friend" checked />
+        <input class="form-check-input" type="checkbox" v-model="friend" @change="onCheck('friend')" id="friend" />
         <label class="form-check-label" for="friend">Mes amis</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="group" @change="onCheck('group')" name="group" checked />
+        <input class="form-check-input" type="checkbox" v-model="group" @change="onCheck('group')" id="group" />
         <label class="form-check-label" for="group">Mes groupes</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="admin" @change="onCheck('admin')" name="admin" checked />
+        <input class="form-check-input" type="checkbox" v-model="admin" @change="onCheck('admin')" id="admin" />
         <label class="form-check-label" for="admin">Mes groupes admin</label>
       </div>
     </div>

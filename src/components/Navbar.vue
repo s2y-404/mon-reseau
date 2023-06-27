@@ -93,7 +93,7 @@ export default {
   name: 'NavbarComponent',
   props: {
     nbInvitation: String,
-    datas: Array
+    dataList: Array
   },
   data() {
     return {
@@ -102,16 +102,14 @@ export default {
       nameInput: ''
     };
   },
-  emits: ['datas-updated'],
+  emits: ['dataListUpdated'],
   methods: {
     typeChange() {
       this.ppInput = document.querySelector('input[name="pp"]:checked').value;
     },
     onSubmit() {
-      console.log(`type: ${this.typeInput}\npp: ${this.ppInput}`);
-
-      const newDatas = this.datas.slice();
-      const id       = this.datas.length > 0 ? +(this.datas[newDatas.length - 1].id) + 1 : 1;
+      const newDatas = this.dataList.slice();
+      const id       = this.dataList.length > 0 ? +(this.dataList[newDatas.length - 1].id) + 1 : 1;
       const img      = this.ppInput;
       const type     = (this.ppInput === 'pp_a') ? 'admin' : this.typeInput
       const name     = this.nameInput
@@ -123,7 +121,7 @@ export default {
         image: img
       });
 
-      this.$emit('datas-updated', newDatas);
+      this.$emit('dataListUpdated', newDatas);
     },
   }
 

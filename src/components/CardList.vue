@@ -45,10 +45,7 @@ export default {
 <style scoped>
   .card-list {
     display: flex;
-    /* justify-content: space-between; */
-    /* align-items: center; */
     flex-wrap: wrap;
-    /* flex-direction: row; */
   }
 
 </style>
