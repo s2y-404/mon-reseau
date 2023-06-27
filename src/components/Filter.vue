@@ -2,12 +2,12 @@
   <div id="filter" class="d-flex">
     <div class="flex-grow-1 d-flex">
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="friend" @change="onCheck('friend')" id="friend" />
-        <label class="form-check-label" for="friend">Mes amis</label>
+        <input class="form-check-input" type="checkbox" v-model="friend" @change="onCheck('friend')" id="myfriend" />
+        <label class="form-check-label" for="myfriend">Mes amis</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
-        <input class="form-check-input" type="checkbox" v-model="group" @change="onCheck('group')" id="group" />
-        <label class="form-check-label" for="group">Mes groupes</label>
+        <input class="form-check-input" type="checkbox" v-model="group" @change="onCheck('group')" id="mygroup" />
+        <label class="form-check-label" for="mygroup">Mes groupes</label>
       </div>
       <div id="group-filtre" class="form-check me-5">
         <input class="form-check-input" type="checkbox" v-model="admin" @change="onCheck('admin')" id="admin" />
@@ -16,7 +16,7 @@
     </div>
     <div class="input-group flex-nowrap">
       <span class="input-group-text" id="filter-search"><i class="fa-solid fa-magnifying-glass"></i></span>
-      <input type="text" class="form-control" placeholder="pseudo ou nom" aria-label="Username" aria-describedby="filter-search">
+      <input type="text" class="form-control" placeholder="pseudo ou nom" v-model="search" aria-label="Username" aria-describedby="filter-search" />
     </div>
   </div>
 </template>
@@ -31,7 +31,8 @@ export default {
       filterChecked: ["friend", "group", "admin"],
       friend: true,
       group: true,
-      admin: true
+      admin: true,
+      search: ""
     }
   },
   methods: {
@@ -58,7 +59,6 @@ export default {
 #filter {
   width: 100%;
   height: 50px;
-  background-color: orange;
 
   display: flex;
   justify-content: space-between;

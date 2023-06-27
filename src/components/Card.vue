@@ -16,7 +16,7 @@
           <h1 class="modal-title fs-5" id="deleteModalLabel">Modal title</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body d-flex align-items-center">
           <i class="fa-solid fa-question"></i> <span>Etes-vous sûr de vouloir supprimer {{ data.name }} de votre réseau ?</span>
         </div>
         <div class="modal-footer">
