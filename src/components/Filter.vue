@@ -14,7 +14,7 @@
         <label class="form-check-label" for="admin">Mes groupes admin</label>
       </div>
     </div>
-    <div class="input-group flex-nowrap">
+    <div class="input-group flex-nowrap" @input="onChangeInput">
       <span class="input-group-text" id="filter-search"><i class="fa-solid fa-magnifying-glass"></i></span>
       <input type="text" class="form-control" placeholder="pseudo ou nom" v-model="search" aria-label="Username" aria-describedby="filter-search" />
     </div>
@@ -25,6 +25,7 @@
 export default {
   name: 'FilterComponent',
   props: {
+    dataList: Array
   },
   data() {
     return {
@@ -32,7 +33,8 @@ export default {
       friend: true,
       group: true,
       admin: true,
-      search: ""
+      search: '',
+      // localDatas: null,
     }
   },
   methods: {
@@ -49,9 +51,17 @@ export default {
         a.push(v);
       else
         a.splice(i, 1);
-    }
+    },
+    onChangeInput() {
+      // this.localDatas = this.dataList.slice()
+      // var regex = new RegExp(`${this.search}`, "ig")
+      // var arrayTemp = this.localDatas.filter(element => element.name.match(regex) && this.filterChecked.includes(element.type))
+      // this.localDatas = arrayTemp
+
+      this.$emit('searchFilter-updated', this.search);
+    },
   },
-  emits: ['filter-checked-updated']
+  emits: ['filter-checked-updated', 'searchFilter-updated']
 }
 </script>
 

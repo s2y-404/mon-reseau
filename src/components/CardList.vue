@@ -1,12 +1,12 @@
 
 <template>
-    <div v-if="!this.dataList.length || !arrayFilter.length" class="d-flex justify-content-center align-items-center">
+    <div v-if="!this.dataList.length || !this.arrayFilter.length" class="d-flex justify-content-center align-items-center">
       <img src="@/assets/users_blank.png" alt="Répertoire vide" style="width: 45%;">
     </div>
-    <div v-else class="card-list">
-      <div v-for="data in this.dataList" :key="data.id">
+    <div v-else-if="this.dataList.length || this.arrayFilter.length" class="card-list">
+      <div v-for="data in this.dataList.filter(element => element.name.match(new RegExp(`${this.searchFilter}`, 'ig')))" :key="data.id">
         <CardComponent  
-          v-if="arrayFilter.includes(data.type)"
+          v-if="this.arrayFilter.includes(data.type)"
           :data="data" 
           @remove="() => removeCard(data.id)" 
         />
@@ -23,7 +23,8 @@ export default {
   },
   props: {
     dataList: Array,
-    arrayFilter: Array
+    arrayFilter: Array,
+    searchFilter: String
   },
   emits: ['remove', 'datas-updated', 'datasUpdated'],
   data() {
