@@ -28,12 +28,12 @@
               </div>
             </div>
 
-            <SearchSuggestionComponent :searchData="searchData" :typeInput="typeInput" @dataListAdded="handleDatasAdded" />
+            <SearchSuggestionComponent :searchData="searchData" :typeInput="typeInput" @dataListAdded="handleDatasAdded" ref="searchSuggestion" />
 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">annuler</button>
-            <button type="submit" class="btn btn-secondary">ajouter</button>
+            <button type="submit" class="btn btn-secondary" @click="clearValues">ajouter</button>
           </div>
         </form>
       </div>
@@ -81,6 +81,9 @@ export default {
       });
       this.$emit('dataListUpdated', newDatas);
     },
+    clearValues() {
+      this.$refs.searchSuggestion.clearInput()
+    }
   }
 
 }

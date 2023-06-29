@@ -1,9 +1,11 @@
 <template>
-<div style="width: 445px;">
+<div style="width: 445px; position: relative;">
   <!-- input text -->
   <div class="input-group flex-nowrap" @input="onChangeInput">
     <span class="input-group-text" id="filter-search"><i class="fa-solid fa-magnifying-glass"></i></span>
-    <input type="text" class="form-control" v-model="searchInput" placeholder="pseudo ou nom" aria-label="Username" aria-describedby="filter-search">
+    <input type="search" class="form-control" v-model="searchInput" placeholder="pseudo ou nom" 
+      @focus="toggleSuggestion(true)" @blur="toggleSuggestion(false)" 
+      aria-label="Username" aria-describedby="filter-search">
   </div>
   <!-- user/group add -->
   <div v-if="this.searchAdd.length > 0" class="searchAdd-group">
@@ -14,8 +16,8 @@
     </div>
   </div>
   <!-- suggestion -->
-  <div v-if="this.searchInput.length >= 3" class="suggestion-group">
-    <div v-for="data in this.localDatas" class="suggestion" :key="data.id" @click="onAddSuggestion(data)">
+  <div v-if="this.showSearchSuggestions && this.searchInput.length >= 3" class="suggestion-group">
+    <div v-for="data in this.localDatas" class="suggestion" :key="data.id" @mousedown="onSuggestionClicked(data)"> <!--@click="onAddSuggestion(data)">-->
       <img :src="require(`@/assets/${data.image}.png`)" class="card-img-top" alt="Photo de profil" />
       <span class="name flex-grow-1">{{ data.name }}</span>
     </div>
@@ -34,7 +36,8 @@ export default {
     return {
       searchInput: '',
       localDatas: null,
-      searchAdd: []
+      searchAdd: [],
+      showSearchSuggestions: false
     }
   },
   methods: {
@@ -55,6 +58,17 @@ export default {
       let indexDel = this.searchAdd.findIndex(el => el.id === id)
       this.searchAdd.splice(indexDel, 1)
       this.$emit('dataListAdded', this.searchAdd);
+    },
+    clearInput() {
+      this.searchAdd = []
+      this.searchInput = ''
+    },
+    toggleSuggestion(show) {
+      this.showSearchSuggestions = show;
+    },
+    onSuggestionClicked(data) {
+      this.onAddSuggestion(data)
+      this.toggleSuggestion(false)
     }
   },
   emits: ['dataListAdded']
@@ -65,7 +79,7 @@ export default {
   .suggestion {
     width: 100%;
     height: 45px;
-    background: #595959;
+    background: #5959599e;
     color: #fff;
     border-bottom: .5px solid #000;
     display: flex;
@@ -76,7 +90,14 @@ export default {
   .suggestion-group {
     width: 100%;
     height: var(45px * 3);
+    position: absolute;
+    top: 37.6px;
+    /* display: none; */
   }
+  .input-group > input:focus + .suggestion-group {
+    background-color: blueviolet;
+  }
+
   img {
     width: 40px;
     height: 45px;
