@@ -4,7 +4,7 @@
     <h1 class="title">Mon réseau</h1>
     <div class="header-right">
       <div class="cube" style="width: 25px; height: 25px; display: block; background-color: #000;"></div>
-      <h2 class="menu">Profil</h2>
+      <span class="menu">Profil</span>
     </div>
   </header>
 </template>
@@ -34,7 +34,15 @@ header {
   align-items: center;
 }
 .menu {
-  padding-left: 25px;
+  margin: 0 0 0 25px;
+  width: 55px;
+  height: 55px;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
 }
 
 .logo {
