@@ -3,7 +3,7 @@
   <!-- input text -->
   <div class="input-group flex-nowrap" @input="onChangeInput">
     <span class="input-group-text" id="filter-search"><i class="fa-solid fa-magnifying-glass"></i></span>
-    <input type="text" class="form-control" v-model="searchInput" placeholder="pseudo ou nom" aria-label="Username" aria-describedby="filter-search">
+    <input type="search" class="form-control" v-model="searchInput" placeholder="pseudo ou nom" aria-label="Username" aria-describedby="filter-search">
   </div>
   <!-- user/group add -->
   <div v-if="this.searchAdd.length > 0" class="searchAdd-group">
@@ -55,7 +55,7 @@ export default {
       let indexDel = this.searchAdd.findIndex(el => el.id === id)
       this.searchAdd.splice(indexDel, 1)
       this.$emit('dataListAdded', this.searchAdd);
-    }
+    },
   },
   emits: ['dataListAdded']
 }
